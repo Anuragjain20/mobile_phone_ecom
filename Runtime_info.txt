@@ -1,0 +1,13 @@
+---------------  Important  ---------------
+
+
+
+
+Please make .env file in core folder with specific data to run the project
+--------- format for .env file -----------
+SECRET_KEY='djang'
+DEBUG=False
+EMAIL_HOST_USER="mail"
+EMAIL_HOST_PASSWORD="password"
+KEY_ID="Update with key id"
+KEY_SECRET="Update with key "

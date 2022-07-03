@@ -1,0 +1,44 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light  bg-light">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand">
+            <!-- <img src="{% static '/utilimg/fork.png' %}" height="28" alt="CoolBrand"> -->
+        </a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/show_all_phones/" class="nav-item nav-link">Mobiles</a> {% if user.is_authenticated %}
+                <a href="/accounts/profile/" class="nav-item nav-link">Profile</a> {% endif %}
+            </div>
+            <div class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+                <!-- Icons -->
+                <ul class="navbar-nav d-flex flex-row me-1">
+
+                    <li class="nav-item me-3 me-lg-0">
+                        <a class="nav-link" href="/cart/">
+                                                           
+                            {% if   request.user   and request.user.profile.get_cart_count != 0  %}
+    
+                            <span class="count-m px-1 border-circle" style="background-color: red;">   {{request.user.profile.get_cart_count}}</span>
+                        {% endif %}
+                     
+                                <i class="fas fa-shopping-cart" ></i>
+    
+                            </a>
+                    </li>
+
+                </ul> {% else %}
+                <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+                <a href="/accounts/signup/" class="nav-item nav-link">Register</a>{% endif %}
+
+
+            </div>
+        </div>
+    </div>
+</nav>

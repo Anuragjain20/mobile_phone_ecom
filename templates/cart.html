@@ -1,0 +1,259 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+    .title {
+        margin-bottom: 5vh
+    }
+    
+    .card {
+        margin: auto;
+        max-width: 1050px;
+        width: 90%;
+        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 1rem;
+        border: transparent
+    }
+    
+    @media(max-width:767px) {
+        .card {
+            margin: 3vh auto
+        }
+    }
+    
+    .cart {
+        background-color: #fff;
+        padding: 4vh 5vh;
+        border-bottom-left-radius: 1rem;
+        border-top-left-radius: 1rem
+    }
+    
+    @media(max-width:767px) {
+        .cart {
+            padding: 4vh;
+            border-bottom-left-radius: unset;
+            border-top-right-radius: 1rem
+        }
+    }
+    
+    .summary {
+        background-color: #ddd;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        padding: 4vh;
+        color: rgb(65, 65, 65)
+    }
+    
+    @media(max-width:767px) {
+        .summary {
+            border-top-right-radius: unset;
+            border-bottom-left-radius: 1rem
+        }
+    }
+    
+    .summary .col-2 {
+        padding: 0
+    }
+    
+    .summary .col-10 {
+        padding: 0
+    }
+    
+    .row {
+        margin: 0
+    }
+    
+    .title b {
+        font-size: 1.5rem
+    }
+    
+    .main {
+        margin: 0;
+        padding: 2vh 0;
+        width: 100%
+    }
+    
+    .col-2,
+    .col {
+        padding: 0 1vh
+    }
+    
+    a {
+        padding: 0 1vh
+    }
+    
+    .close {
+        margin-left: auto;
+        font-size: 0.7rem
+    }
+    
+    img {
+        width: 3.5rem
+    }
+    
+    .back-to-shop {
+        margin-top: 4.5rem
+    }
+    
+    h5 {
+        margin-top: 4vh
+    }
+    
+    hr {
+        margin-top: 1.25rem
+    }
+    
+    form {
+        padding: 2vh 0
+    }
+    
+    select {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1.5vh 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247)
+    }
+    
+    input {
+        border: 1px solid rgba(0, 0, 0, 0.137);
+        padding: 1vh;
+        margin-bottom: 4vh;
+        outline: none;
+        width: 100%;
+        background-color: rgb(247, 247, 247)
+    }
+    
+    input:focus::-webkit-input-placeholder {
+        color: transparent
+    }
+    
+    .btn {
+        background-color: #000;
+        border-color: #000;
+        color: white;
+        width: 100%;
+        font-size: 0.7rem;
+        margin-top: 4vh;
+        padding: 1vh;
+        border-radius: 0
+    }
+    
+    .btn:focus {
+        box-shadow: none;
+        outline: none;
+        box-shadow: none;
+        color: white;
+        -webkit-box-shadow: none;
+        -webkit-user-select: none;
+        transition: none
+    }
+    
+    .btn:hover {
+        color: white
+    }
+    
+    a {
+        color: black
+    }
+    
+    a:hover {
+        color: black;
+        text-decoration: none
+    }
+    
+    #code {
+        background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+        background-repeat: no-repeat;
+        background-position-x: 95%;
+        background-position-y: center
+    }
+</style>
+<div class="container-fluid pt-4 pb-3 py-sm-4">
+
+    <div class="card">
+        <div class="row ">
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col">
+                            <h4><b>Your Cart</b></h4>
+                        </div>
+                    </div>
+                </div>
+
+                {% for item in cart_items %}
+                <div class="row">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="{{item.item.images.first.image.url}}"></div>
+                        <div class="col">
+                            <div class="row text-muted">{{item.item.category.name}}</div>
+                            <div class="row">{{item.item.company.name}}</div>
+                        </div>
+                        <div class="col">
+
+                            <div class="row">{{item.item.title}}</div>
+                        </div>
+                        <div class="col"> <a href="/remove_from_cart/{{item.item.id}}/">-</a><span class="border">{{item.quantity}}</span><a href="/add_to_cart/{{item.item.id}}/">+</a> </div>
+                        <div class="col">₹ {{item.item.price}}<span class="close"></span></div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="back-to-shop"><a href="/">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            </div>
+            <div class="col-md-4 summary">
+                <div>
+                    <h5><b>Summary</b></h5>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="padding-left:0;">{{total_quantity}} items</div>
+                    <div class="col text-right">₹ {{cart_obj.total_amt}}</div>
+                </div>
+                <!-- <form>
+    
+                    <p>GIVE CODE</p> <input id="code" placeholder="Enter your code">
+                </form> -->
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col">TOTAL PRICE</div>
+                    <div class="col text-right">₹ {{cart_obj.total_amt}}</div>
+                </div> <button class="btn" id="rzp-button1">CHECKOUT</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{key_id}}",
+        "amount": "{{cart_obj.total_amt}}",
+        "currency": "INR",
+
+        "order_id": "{{order_id}}",
+        "handler": function(response) {
+            console.log(response)
+            window.location.href = `/orders/payment-successfull/?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}`
+
+        },
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function(response) {
+
+        window.location.href = '/orders/failure/'
+
+        // alert(response.error.code);
+        // alert(response.error.description);
+        // alert(response.error.source);
+        // alert(response.error.step);
+        // alert(response.error.reason);
+        // alert(response.error.metadata.order_id);
+        // alert(response.error.metadata.payment_id);
+    });
+    document.getElementById('rzp-button1').onclick = function(e) {
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+
+{% endblock %}

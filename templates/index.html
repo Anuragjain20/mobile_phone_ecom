@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+    .desc a {
+        text-decoration: none!important;
+        font-size: medium;
+    }
+</style>
+<h1 class="text-center">Home</h1>
+
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-8 offset-sm-2 text-center ">
+            <h2>Best Sellers</h2>
+        </div>
+    </div>
+    <div class="row row-pb-md">
+        {% for mobile in mobiles %}
+        <div class="col-lg-4 mb-4 text-center">
+            <div class="product-entry border ">
+
+                <a href="#" class="prod-img">
+                    <img src="{{ mobile.images.first.image.url }}" class="img-fluid" alt="Free html5 bootstrap 4 template">
+                </a>
+
+                <div class="desc">
+                    <h2><a href="/product_details/{{mobile.id}}/">{{mobile.title}}</a></h2>
+                    <span class="price">₹ {{mobile.price}}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+        <div class="row">
+            <div class="col-md-12 text-center my-2">
+                <p><a href="/show_all_phones/" class="btn btn-primary btn-lg">Show All Products</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2 text-center my-2 ">
+            <h2>Trusted Partners</h2>
+        </div>
+    </div>
+    <div class="row py-2">
+        {% for company in companies %}
+        <div class="col partner-col text-center my-auto">
+            <img src="{{company.logo.url}}" class="img-fluid my-auto" alt="Company" style="max-width:40% ;">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

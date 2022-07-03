@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+    .desc a {
+        text-decoration: none!important;
+        font-size: medium;
+    }
+</style>
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-8 offset-sm-2 text-center ">
+            <h2>All Phones</h2>
+        </div>
+    </div>
+    <div class="row row-pb-md">
+        {% for mobile in mobiles %}
+        <div class="col-lg-4 mb-4 text-center">
+            <div class="product-entry border py-4" style="min-height:400px ;">
+
+                <a href="#" class="prod-img my-4">
+                    {% if mobile.images.first.image.url %}
+                    <img src="{{ mobile.images.first.image.url }}" class="img-fluid" alt="phones">
+                    {% else %}
+                    <img src="data:image/jpeg;base64,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" class="img-fluid" alt="phones">
+                    {% endif %}
+                </a>
+
+                <div class="desc">
+                    <h2><a href="/product_details/{{mobile.id}}/">{{mobile.title}}</a></h2>
+                    <span class="price">₹ {{mobile.price}}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+        <!--Pagination-->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if mobiles.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ mobiles.previous_page_number }}">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
+                </li>
+                {% endif %} {% for i in mobiles.paginator.page_range %} {% if mobiles.number == i %}
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">
+                      {{ i }}
+                      <span class="sr-only">(current)</span>
+                    </span>
+                </li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %} {% endfor %} {% if mobiles.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ mobiles.next_page_number }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        <!--end of Pagination-->
+
+    </div>
+</div>
+
+{% endblock %}
